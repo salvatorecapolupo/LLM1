@@ -1,0 +1,24 @@
+name: Esegui Generatore Markov
+
+# Definisce QUANDO deve partire l'azione
+on:
+  workflow_dispatch: # Crea un pulsante "Run workflow" nell'interfaccia di GitHub per avviarlo a mano
+
+jobs:
+  esegui-script:
+    runs-on: ubuntu-latest # Usa un server virtuale Linux fornito da GitHub
+
+    steps:
+      # Passaggio 1: GitHub scarica il codice dal tuo repository al server virtuale
+      - name: Checkout del codice
+        uses: actions/checkout@v4
+
+      # Passaggio 2: Prepara l'ambiente Python
+      - name: Configura Python 3
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      # Passaggio 3: Esegue finalmente il nostro script!
+      - name: Lancia il generatore
+        run: python generatore.py
